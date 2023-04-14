@@ -96,9 +96,8 @@ def NN_model():
 
 
 
-#Function which find a good set of hyperparameters for the NN
-def find_set_of_hp():
-  def build_model(hp):
+#Function to inicialize NN model
+def build_model(hp):
     model = Sequential()
     model.add(Dense(units=hp.Int('units', min_value=32, max_value=512, step=32), activation='relu', input_shape=(54,)))
     model.add(Dropout(hp.Float('dropout', min_value=0.0, max_value=0.4, step=0.1)))
@@ -106,6 +105,10 @@ def find_set_of_hp():
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
+
+
+#Function which find a good set of hyperparameters for the NN
+def find_set_of_hp():
   hyperparameters = HyperParameters()
   hyperparameters.Int('units', min_value=32, max_value=512, step=32)
   hyperparameters.Float('dropout', min_value=0.0, max_value=0.2, step=0.1)
